@@ -1,56 +1,73 @@
 import 'package:flutter/material.dart';
 
-class ZodiacPage extends StatelessWidget {
+class Startpage extends StatelessWidget {
+  const Startpage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 450,
-      height: 852,
-      child: Stack(
+    // Use MediaQuery to get screen width and height
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    return Scaffold(
+      body: Stack(
         children: [
-          // Background Image
+          // Background image
           Container(
-            width: 450,
-            height: 852,
-            decoration: BoxDecoration(
+            width: screenWidth,
+            height: screenHeight,
+            decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(
-                    "assets/stars_background.jpg"), // Ensure asset path is correct
-                fit: BoxFit.fill,
+                image: AssetImage('assets/stars_background.jpg'),
+                fit: BoxFit.cover,
+                alignment: Alignment.center,
               ),
             ),
           ),
-          // Title Text
-          Positioned(
-            top: 450, // Positioning from the top
-            left: 130, // Positioning from the left
-            child: Text(
-              'Зурхай',
-              style: TextStyle(
-                color: Color(0xFFEFF8FF),
-                fontSize: 24,
-                fontStyle: FontStyle.italic,
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w700,
-                height: 1.2,
-                letterSpacing: 2.16,
-              ),
+          // Centered content
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/earth.png',
+                  width: 215,
+                  height: 215,
+                ),
+                const SizedBox(
+                  height: 60, // Space between the image and the button
+                ),
+              ],
             ),
           ),
-          // Zodiac Symbols Container with positioned icon
+          // Positioned button at the bottom center
           Positioned(
-            top: 450, // Change this value to move the icon up or down
-            left: 70, // Change this value to move the icon left or right
-            child: Transform(
-              transform: Matrix4.identity()
-                ..rotateZ(-1.57), // Adjust rotation if needed
-              child: Container(
-                width: 251,
-                height: 212,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/png-image.png"),
-                    fit: BoxFit.fill,
+            bottom:
+                30, // You can adjust this value to fine-tune the button position
+            left: screenWidth *
+                0.25, // Position button at the center horizontally
+            child: SizedBox(
+              width: 200, // Set width of the button
+              child: OutlinedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(
+                    color: Color.fromARGB(255, 248, 185, 255), // Border color
+                    width: 2, // Border width
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 60,
+                      vertical: 15), // Padding inside the button
+                  backgroundColor: const Color.fromARGB(
+                      255, 16, 17, 54), // Background color of the button
+                ),
+                child: const Text(
+                  'эхлэх',
+                  style: TextStyle(
+                    color: Colors.white, // Text color
+                    fontSize: 18, // Text size
                   ),
                 ),
               ),
@@ -59,5 +76,5 @@ class ZodiacPage extends StatelessWidget {
         ],
       ),
     );
-  }
+  } // End of build method
 }
